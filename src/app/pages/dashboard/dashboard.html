@@ -1,0 +1,45 @@
+<div class="min-h-dvh bg-slate-950 text-slate-100">
+  <header class="border-b border-blue-900 bg-slate-900">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-8">
+      <a href="/dashboard" class="text-xl font-bold tracking-tight text-blue-400">
+        WebAngular
+      </a>
+
+      <nav aria-label="Menu principal" class="flex flex-wrap items-center gap-2">
+        <a href="/dashboard" aria-current="page"
+          class="rounded-lg bg-blue-950 px-3 py-2 text-sm font-semibold text-blue-300">
+          Dashboard
+        </a>
+
+        <a href="/cadastrar-cliente" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-slate-800">
+          Cadastrar cliente
+        </a>
+
+        <a href="/consultar-clientes"
+          class="rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-slate-800">
+          Consultar clientes
+        </a>
+      </nav>
+
+      <button type="button" (click)="logout()"
+        class="cursor-pointer rounded-lg border border-slate-600 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+        Sair da conta
+      </button>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10 sm:px-8">
+    <section aria-labelledby="titulo-dashboard" class="rounded-2xl border border-blue-900 bg-slate-900 p-6 sm:p-8">
+      <p class="mb-2 text-sm font-semibold text-blue-400">Dashboard</p>
+
+      <h1 id="titulo-dashboard" class="text-3xl font-bold tracking-tight">
+        Boas-vindas, {{ nomeUsuario() }}!
+      </h1>
+
+      <p class="mt-3 text-slate-300">
+        Seu perfil de acesso é
+        <strong class="font-semibold text-white">{{ perfilUsuario() }}</strong>.
+      </p>
+    </section>
+  </main>
+</div>

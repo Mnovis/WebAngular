@@ -1,0 +1,148 @@
+<main
+  class="flex min-h-dvh items-center justify-center bg-linear-to-br from-slate-950 via-blue-950 to-slate-900 px-4 py-8 text-slate-100 scheme-dark"
+>
+  <section
+    aria-labelledby="titulo-autenticacao"
+    class="w-full max-w-md rounded-2xl border border-blue-900 bg-slate-900 p-6 shadow-2xl shadow-blue-950/50 sm:p-8"
+  >
+    <header class="mb-8">
+      <p class="mb-2 text-sm font-semibold tracking-wide text-blue-400">
+        WebAngular
+      </p>
+      <h1 id="titulo-autenticacao" class="text-3xl font-bold tracking-tight">
+        Crie sua conta
+      </h1>
+    </header>
+
+    @if (mensagemSucesso()) {
+      <div
+        role="status"
+        class="mb-5 rounded-lg border border-green-700 bg-green-950 px-4 py-3 text-sm text-green-200"
+      >
+        {{ mensagemSucesso() }}
+      </div>
+    }
+
+    @if (mensagemErro()) {
+      <div
+        role="alert"
+        class="mb-5 rounded-lg border border-red-700 bg-red-950 px-4 py-3 text-sm text-red-200"
+      >
+        {{ mensagemErro() }}
+      </div>
+    }
+
+    <form
+      class="space-y-5"
+      [formGroup]="formulario"
+      (ngSubmit)="criarUsuario()"
+      novalidate
+    >
+      @let nome = formulario.controls.nome;
+      @let email = formulario.controls.email;
+      @let senha = formulario.controls.senha;
+
+      <div>
+        <label for="nome" class="mb-2 block text-sm font-medium text-slate-200">
+          Informe seu nome
+        </label>
+        <input
+          id="nome"
+          name="nome"
+          formControlName="nome"
+          type="text"
+          autocomplete="name"
+          placeholder="Digite aqui"
+          required
+          [attr.aria-invalid]="nome.touched && nome.invalid"
+          [attr.aria-describedby]="nome.touched && nome.invalid ? 'nome-erro' : null"
+          class="w-full rounded-lg border border-slate-600 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 focus:border-blue-400 focus:outline-2 focus:outline-blue-400 aria-invalid:border-red-400"
+        />
+
+        @if (nome.touched && nome.invalid) {
+          <p id="nome-erro" class="mt-2 text-sm text-red-400">
+            @if (nome.hasError('required')) {
+              Informe seu nome.
+            } @else if (nome.hasError('minlength')) {
+              O nome deve ter pelo menos 8 caracteres.
+            }
+          </p>
+        }
+      </div>
+
+      <div>
+        <label for="email" class="mb-2 block text-sm font-medium text-slate-200">
+          E-mail
+        </label>
+        <input
+          id="email"
+          name="email"
+          formControlName="email"
+          type="email"
+          autocomplete="email"
+          placeholder="voce@exemplo.com"
+          required
+          [attr.aria-invalid]="email.touched && email.invalid"
+          [attr.aria-describedby]="email.touched && email.invalid ? 'email-erro' : null"
+          class="w-full rounded-lg border border-slate-600 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 focus:border-blue-400 focus:outline-2 focus:outline-blue-400 aria-invalid:border-red-400"
+        />
+
+        @if (email.touched && email.invalid) {
+          <p id="email-erro" class="mt-2 text-sm text-red-400">
+            @if (email.hasError('required')) {
+              Informe seu e-mail.
+            } @else if (email.hasError('email')) {
+              Digite um e-mail válido, como voce@exemplo.com.
+            }
+          </p>
+        }
+      </div>
+
+      <div>
+        <label for="senha" class="mb-2 block text-sm font-medium text-slate-200">
+          Senha
+        </label>
+        <input
+          id="senha"
+          name="senha"
+          formControlName="senha"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Digite sua senha"
+          required
+          [attr.aria-invalid]="senha.touched && senha.invalid"
+          [attr.aria-describedby]="senha.touched && senha.invalid ? 'senha-erro' : null"
+          class="w-full rounded-lg border border-slate-600 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 focus:border-blue-400 focus:outline-2 focus:outline-blue-400 aria-invalid:border-red-400"
+        />
+
+        @if (senha.touched && senha.invalid) {
+          <p id="senha-erro" class="mt-2 text-sm text-red-400">
+            @if (senha.hasError('required')) {
+              Informe sua senha.
+            } @else if (senha.hasError('pattern')) {
+              Use pelo menos 8 caracteres, com uma letra maiúscula, uma minúscula,
+              um número e um símbolo. A senha não pode conter espaços.
+            }
+          </p>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="w-full cursor-pointer rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
+      >
+        Realizar cadastro
+      </button>
+    </form>
+
+    <p class="mt-6 text-center text-sm text-slate-300">
+      Já tem uma conta?
+      <a
+        href="/autenticar-usuario"
+        class="rounded-sm font-semibold text-blue-400 underline underline-offset-4 hover:text-blue-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
+      >
+        Acessar conta
+      </a>
+    </p>
+  </section>
+</main>
